@@ -3,13 +3,13 @@ const menuArray = [
         name: "Pizza",
         ingredients: ["pepperoni", "mushrom", "mozarella"],
         id: 0,
-        price: 14,
+        price: 15,
         emoji: "🍕"
     },
     {
         name: "Hamburger",
         ingredients: ["beef", "cheese", "lettuce"],
-        price: 12,
+        price: 14,
         emoji: "🍔",
         id: 1
     },
@@ -21,3 +21,5 @@ const menuArray = [
         id: 2
     }
 ]
+
+export {menuArray}

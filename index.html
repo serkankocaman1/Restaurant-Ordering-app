@@ -11,9 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <script src="index.js" type="module"></script>
 </head>
 <body>
     <main class="app">
+        <div class="app__container">
         <section class="banner">
             <div class="banner__container">
                 <h2 class="banner__title">Serkan's Diner</h2>
@@ -29,7 +31,7 @@
                         <p class="food-contents">pepperoni,mushrom,mozarella</p>
                         <p class="price">$14</p>
                     </div>
-                    <button class="cart__add-button">+</button>
+                    <button  class="cart__add-button">+</button>
                 </div>
             </section>
             <section class="menu__item">
@@ -55,6 +57,34 @@
                 </div>
             </section>
         </section>
+        <section class="cart">
+            <h2 class="cart-header">Your order</h2>
+            <div class="cart__container">
+            </div>
+            <div class="cart-total">
+                <h2>Total price:</h2>
+                <p class="price">$<span>0</span></p>
+
+            </div>
+            <button class="cart-order">Complete order</button>
+        </section>
+        <section class="card">
+            <div class="card__container">
+                <h2 class="card-header">Enter card details</h2>
+                <form class="card-form">
+                    <input id="card-name" type="text" placeholder="Enter your name">
+                    <input id="card-number" type="text" placeholder="Enter card number">
+                    <input id="card-cvv" type="text" placeholder="Enter CVV">
+                    <input type="submit">
+                </form>
+            </div>
+        </section>
+        <section class="completed">
+            <div class="completed__container">
+                <h3>Thanks, James! Your order is on its way!</h3>
+            </div>
+        </section>
+        </div>
     </main>
 </body>
 </html>
