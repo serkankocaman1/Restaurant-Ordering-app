@@ -1,19 +1,21 @@
 import { menuArray } from "./data.js"
 
 const menuEl = document.querySelector(".menu")
-const cartEl = document.querySelector(".cart__container")
+const cartContainerEl = document.querySelector(".cart__container")
 const cartTotalEl = document.querySelector(".cart-total .price span")
+const cartEl = document.querySelector(".cart")
+const cardEl = document.querySelector(".card")
+const completOrder = document.querySelector(".completed")
+
 
 localStorage.clear()
 
 menuList()
 
-let totalPrice = [0]
-
-
 
 const setCartProduct = e => {
     let cart = ""
+    let price = 0
     const keys = Object.keys(localStorage)
     const productArr = keys.map(key => JSON.parse(localStorage.getItem(key)))
     productArr.forEach(product => {
@@ -23,51 +25,61 @@ const setCartProduct = e => {
         <button class="cart-remove" data-id="${product.id}">remove</button>
         <p class="price">$${product.price}</p>
         </div>`
-        console.log(product.name + " : " +product.amount)
+        price += (product.price * product.amount)
     })
-    cartTotalEl.textContent =`${e}`
-    cartEl.innerHTML = cart
+    if(localStorage.length == 0){
+        cartEl.style.display = "none";
+    }else{
+        cartEl.style.display = "flex";
+    }
+    cartTotalEl.textContent =`${price}`
+    cartContainerEl.innerHTML = cart
 }
 
 
 addEventListener("click", e => {
     const elementId = e.target.dataset.id
     if (elementId) {
-        let price = 0
         let amount = 1
+        const item = JSON.parse(localStorage.getItem(elementId))
             if(e.target.classList.contains('cart-remove')){
-                const currentAmount = JSON.parse(localStorage.getItem(elementId)).amount - 1
-                amount = currentAmount    
-                const item = JSON.parse(localStorage.getItem(elementId))
-                price += 0 - item.price
-            }else if(e.target.classList.contains('cart__add-button')){
-                if(localStorage.getItem(elementId)){
-                    const currentAmount = JSON.parse(localStorage.getItem(elementId)).amount + 1
-                    amount = currentAmount
-                    const item = JSON.parse(localStorage.getItem(elementId))
-                    price += item.price
+                const currentAmount = item.amount - 1
+                amount = currentAmount
+                if(currentAmount < 1){
+                    localStorage.removeItem(elementId)
                 }else{
-                    const currentAmount = 1
-                    amount = currentAmount
                     const myProduct = { ...menuArray[elementId], amount: amount }
                     localStorage.setItem(elementId, JSON.stringify(myProduct))
-                    const item = JSON.parse(localStorage.getItem(elementId))
-                    price += item.price
                 }
-                
+            }else if(e.target.classList.contains('cart__add-button')){
+                completOrder.classList.add("visible")
+                if(localStorage.getItem(elementId)){
+                    const currentAmount = item.amount + 1
+                    amount = currentAmount
+                }
+                const myProduct = { ...menuArray[elementId], amount: amount }
+                localStorage.setItem(elementId, JSON.stringify(myProduct))
             }
-        const myProduct = { ...menuArray[elementId], amount: amount }
-        localStorage.setItem(elementId, JSON.stringify(myProduct))
-        totalPrice.push(price)
-        const currentTotalPrice = totalPrice.reduce((total, currentItem) =>{
-            console.log(total)
-            return total + currentItem
-        })
-        setCartProduct(currentTotalPrice)
+        setCartProduct()
     }
-
+    if(e.target.classList.contains('cart-order')){
+        cardEl.classList.remove("visible")
+    }else if(e.target.classList.contains('pay-button')){
+        const cardName = document.getElementById("card-name")
+        cardEl.classList.add("visible")
+        cartEl.style.display = "none";
+        completOrder.classList.remove("visible")
+        if (cardName) {
+            localStorage.clear()
+            completOrder.innerHTML = `
+            <div class="completed__container">
+            <h3>Thanks,${cardName.value}! Your order is on its way!</h3>
+            </div>`
+          } else {
+            console.log('input is falsy');
+          }
+    }
 })
-
 
 function menuList() {
     let menu = ""

@@ -107,7 +107,7 @@ button{
 }
 
 .cart{
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -167,7 +167,7 @@ button{
 }
 
 .card{
-    display: none;
+    display: flex;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -199,18 +199,20 @@ button{
 .card-form input{
     height: 40px;
     margin-top: 15px;
+    font-size: 18px;
 }
 
-.card-form input[type="submit"]{
+.pay-button{
     border: none;
     background-color: #16DB99;
     color: #ffff;
+    padding: 15px 50px;
     border-radius: 5px;
-    font-family:'Courier New', Courier, monospace;
+    margin-top: 25px;
 }
 
 .completed{
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -228,4 +230,8 @@ button{
     height: 75px;
     width: 300px;
     border-radius: 5px;
+}
+
+.visible{
+    display: none;
 }

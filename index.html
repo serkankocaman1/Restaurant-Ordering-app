@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <script src="index.js" type="module"></script>
 </head>
 <body>
     <main class="app">
@@ -68,18 +67,18 @@
             </div>
             <button class="cart-order">Complete order</button>
         </section>
-        <section class="card">
+        <section class="card visible">
             <div class="card__container">
                 <h2 class="card-header">Enter card details</h2>
                 <form class="card-form">
                     <input id="card-name" type="text" placeholder="Enter your name">
                     <input id="card-number" type="text" placeholder="Enter card number">
                     <input id="card-cvv" type="text" placeholder="Enter CVV">
-                    <input type="submit">
                 </form>
+                <button class="pay-button">Pay</button>
             </div>
         </section>
-        <section class="completed">
+        <section class="completed visible">
             <div class="completed__container">
                 <h3>Thanks, James! Your order is on its way!</h3>
             </div>
@@ -88,3 +87,5 @@
     </main>
 </body>
 </html>
+
+<script src="index.js" type="module"></script>
